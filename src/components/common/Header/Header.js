@@ -40,7 +40,6 @@ const linksSeconedHeder = [
 const HeaderComponent = () => {
   const [term, setTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
 
   const getTitle = (result) => {
     const title = result?.volumeInfo?.title;
@@ -49,8 +48,8 @@ const HeaderComponent = () => {
       : title?.toString() || "not found";
   };
 
-  const handleInputChange = (e, value) => {
-    setTerm(value);
+  const handleInputChange = (e) => {
+    setTerm(e.target.value);
   };
   return (
     <Fragment>
@@ -59,7 +58,6 @@ const HeaderComponent = () => {
         color={"white"}
         sx={{ boxShadow: "none" }}
         position="fixed">
-
 
         <Toolbar sx={{justifyContent : "space-between"}}>
           <Stack
@@ -107,7 +105,8 @@ const HeaderComponent = () => {
                     label="Type any book here"
                     variant="outlined"
                     size="small"
-                    onChange={(e) => handleInputChange(e, e.target.value)}
+                    onChange={handleInputChange}
+                    value = {term}
                     InputProps={{
                       ...params.InputProps,
                       endAdornment: <SearchIcon color="grey" />,
@@ -188,8 +187,7 @@ const HeaderComponent = () => {
               direction="row"
               justifyContent="flex-start"
               alignItems="center"
-              spacing={3}
-            >
+              spacing={3} >
               {linksSeconedHeder.map((link, index) => (
                 <Link
                   key={index}

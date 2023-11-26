@@ -11,8 +11,11 @@ const FetchData = ({ term, setSearchResults }) => {
           },
         });
 
+        if (response?.data && response?.data?.items) {
         setSearchResults(response.data.items);
-      } catch (error) {
+      }
+    }
+       catch (error) {
         console.error('Error fetching data:', error);
       }
     };
